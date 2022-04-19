@@ -3,7 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TripLog.Views.TripLogDetailPage"
-    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    xmlns:viewmodel="clr-namespace:TripLog.ViewModels"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:DataType="viewmodel:TripLogDetailViewModel">
 
     <Grid RowDefinitions="4*, auto, 1*">
 
@@ -16,13 +18,13 @@
 
         <StackLayout Padding="10"
                      Grid.Row="1">
-            <Label x:Name="title"
+            <Label Text="{Binding TripLogEntry.Title}"
                    HorizontalOptions="Center" />
-            <Label x:Name="date"
+            <Label Text="{Binding TripLogEntry.Date}"
                    HorizontalOptions="Center" />
-            <Label x:Name="rating"
+            <Label Text="{Binding TripLogEntry.Rating}"
                    HorizontalOptions="Center" />
-            <Label x:Name="notes"
+            <Label Text="{Binding TripLogEntry.Notes}"
                    HorizontalOptions="Center" />
         </StackLayout>
     </Grid>

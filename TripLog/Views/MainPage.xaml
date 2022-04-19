@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TripLog.Views.MainPage"
     xmlns:models="clr-namespace:TripLog.Models"
+    xmlns:viewmodel="clr-namespace:TripLog.ViewModels"
+    x:DataType="viewmodel:MainViewModel"
     Title="TripLog">
 
     <ContentPage.ToolbarItems>
@@ -13,7 +15,8 @@
 
     <CollectionView x:Name="trips"
                     SelectionMode="Single"
-                    SelectionChanged="OnTripSelected">
+                    SelectionChanged="OnTripSelected"
+                    ItemsSource="{Binding LogEntries}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:TripLogEntry">
                 <Grid Padding="10"

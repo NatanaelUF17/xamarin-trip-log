@@ -3,24 +3,35 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TripLog.Views.NewTripEntryPage"
+    xmlns:viewmodel="clr-namespace:TripLog.ViewModels"
+    x:DataType="viewmodel:NewTripEntryViewModel"
     Title="New Trip Entry">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" />
+        <ToolbarItem Text="Save"
+                     Command="{Binding SaveCommand}"/>
     </ContentPage.ToolbarItems>
 
     <TableView Intent="Form">
         <TableRoot>
             <TableSection>
-                <EntryCell Label="Title" />
+                <EntryCell Label="Title"
+                           x:Name="title"
+                           Text="{Binding Title}" />
                 <EntryCell Label="Latitude"
-                           Keyboard="Numeric" />
+                           Keyboard="Numeric"
+                           Text="{Binding Latitude}" />
                 <EntryCell Label="Longitude"
-                           Keyboard="Numeric" />
-                <EntryCell Label="Date" />
+                           Keyboard="Numeric"
+                           Text="{Binding Longitude}" />
+                <EntryCell Label="Date"
+                           Text="{Binding Date, StringFormat='{0:d}'}" />
                 <EntryCell Label="Rating"
-                           Keyboard="Numeric" />
-                <EntryCell Label="Notes" />
+                           x:Name="rating"
+                           Keyboard="Numeric"
+                           Text="{Binding Rating}" />
+                <EntryCell Label="Notes"
+                           Text="{Binding Notes}" />
             </TableSection>
         </TableRoot>
     </TableView>
