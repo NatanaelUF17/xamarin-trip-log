@@ -1,11 +1,16 @@
 ﻿using System;
 using TripLog.Models;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
-    public class TripLogDetailViewModel : BaseViewModel
+    public class TripLogDetailViewModel : BaseViewModel<TripLogEntry>
     {
-        public TripLogDetailViewModel(TripLogEntry tripLogEntry)
+        public TripLogDetailViewModel(INavService navigationService) : base(navigationService)
+        {    
+        }
+
+        public override void Init(TripLogEntry tripLogEntry)
         {
             TripLogEntry = tripLogEntry;
         }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿  using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using TripLog.Models;
+using TripLog.Services;
 using Xamarin.Forms;
 
 namespace TripLog.ViewModels
@@ -9,14 +11,23 @@ namespace TripLog.ViewModels
     {
         public Command SaveCommand { private set; get; }
 
-        public NewTripEntryViewModel()
+        public NewTripEntryViewModel(INavService navigationService) : base(navigationService)
         {
             Date = DateTime.Today;
 
-            SaveCommand = new Command(SaveTripLog, CanSaveTripLog);
+            SaveCommand = new Command(async () => 
+            {
+                await SaveTripLog();
+                CanSaveTripLog();
+            });
         }
 
-        void SaveTripLog()
+        public override void Init()
+        {
+            
+        }
+
+        async Task SaveTripLog()
         {
             var newTripLog = new TripLogEntry
             {
@@ -27,6 +38,8 @@ namespace TripLog.ViewModels
                 Rating = Rating,
                 Notes = Notes
             };
+
+            await NavigationService.GoBack();
         }
 
         bool CanSaveTripLog() => !string.IsNullOrWhiteSpace(Title) && !HasErrors;

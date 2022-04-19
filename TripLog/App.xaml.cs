@@ -1,4 +1,6 @@
 ﻿using System;
+using TripLog.Services;
+using TripLog.ViewModels;
 using TripLog.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +13,15 @@ namespace TripLog
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            var mainPage = new NavigationPage(new MainPage());
+            var navigationService = DependencyService.Get<INavService>() as XamarinFormsNavService;
+
+            navigationService.Navigation = mainPage.Navigation;
+            navigationService.RegisterViewMapping(typeof(MainViewModel), typeof(MainPage));
+            navigationService.RegisterViewMapping(typeof(TripLogDetailViewModel), typeof(TripLogDetailPage));
+            navigationService.RegisterViewMapping(typeof(NewTripEntryViewModel), typeof(NewTripEntryPage));
+
+            MainPage = mainPage;
         }
 
         protected override void OnStart()

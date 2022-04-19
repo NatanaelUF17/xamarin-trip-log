@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using TripLog.Services;
 using TripLog.ViewModels;
 using Xamarin.Forms;
 
@@ -16,7 +17,7 @@ namespace TripLog.Views
             InitializeComponent();
 
             BindingContextChanged += NewTripEntryPage_BindingContextChanged;
-            BindingContext = new NewTripEntryViewModel();
+            BindingContext = new NewTripEntryViewModel(DependencyService.Get<INavService>());
         }
 
         void NewTripEntryPage_BindingContextChanged(object sender, EventArgs e)
